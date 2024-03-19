@@ -1,0 +1,26 @@
+-- Function to enable ESP for all players
+local function EnableESP()
+    -- Loop through all players in the game
+    for _, player in ipairs(game.Players:GetPlayers()) do
+        -- Check if the player is not the local player
+        if player ~= game.Players.LocalPlayer then
+            -- Check if the player has a character and the character has a HumanoidRootPart
+            local character = player.Character
+            if character and character:FindFirstChild("HumanoidRootPart") then
+                -- Create an ESP box around the player's HumanoidRootPart
+                local esp = Instance.new("BoxHandleAdornment")
+                esp.Name = "ESP" -- Name the ESP object
+                esp.Adornee = character.HumanoidRootPart -- Attach to HumanoidRootPart
+                esp.AlwaysOnTop = true -- Ensure it's always visible
+                esp.ZIndex = 5 -- Set the ZIndex to be above other GUI elements
+                esp.Size = character.HumanoidRootPart.Size -- Match the size of the part
+                esp.Color3 = Color3.fromRGB(255, 0, 0) -- Red color for ESP
+                esp.Transparency = 0.5 -- Set transparency for visibility
+                esp.Parent = game.CoreGui -- Attach to CoreGui for visibility
+            end
+        end
+    end
+end
+
+-- Call the function to enable ESP
+EnableESP()
